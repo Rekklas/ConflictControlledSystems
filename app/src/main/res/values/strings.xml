@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ConflictControlledSystems</string>
+    <string name="count_row_matrix">Кількість рядків матриці</string>
+    <string name="count_column_matrix">Кількість стовпців матриці</string>
+    <string name="affine_transformation">Афінне перетворення</string>
+    <string name="btn_make_transform">Зробити перетворення</string>
+    <string name="btn_fill_matrix">Заповнити матрицю</string>
+</resources>

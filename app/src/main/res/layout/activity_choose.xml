@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ChooseActivity">
+
+    <com.xw.repo.BubbleSeekBar
+        android:id="@+id/bsb_row_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
+        app:bsb_always_show_bubble="true"
+        app:bsb_auto_adjust_section_mark="true"
+        app:bsb_bubble_color="@color/colorAccent"
+        app:bsb_bubble_text_size="20sp"
+        app:bsb_max="10"
+        app:bsb_min="1"
+        app:bsb_progress="1"
+        app:bsb_section_count="9"
+        app:bsb_section_text_position="below_section_mark"
+        app:bsb_section_text_size="20sp"
+        app:bsb_seek_by_section="true"
+        app:bsb_show_section_mark="true"
+        app:bsb_show_thumb_text="true"
+        app:bsb_thumb_text_color="@color/colorAccent"
+        app:bsb_thumb_text_size="18sp"
+        app:bsb_touch_to_seek="true"
+        app:bsb_track_size="5dp" />
+
+    <TextView
+        android:id="@+id/txt_row_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="@string/count_row_matrix"
+        android:textSize="20sp" />
+
+    <com.xw.repo.BubbleSeekBar
+        android:id="@+id/bsb_column_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
+        app:bsb_always_show_bubble="true"
+        app:bsb_auto_adjust_section_mark="true"
+        app:bsb_bubble_color="@color/colorAccent"
+        app:bsb_bubble_text_size="20sp"
+        app:bsb_max="10"
+        app:bsb_min="1"
+        app:bsb_progress="1"
+        app:bsb_section_count="9"
+        app:bsb_section_text_position="below_section_mark"
+        app:bsb_section_text_size="20sp"
+        app:bsb_seek_by_section="true"
+        app:bsb_show_section_mark="true"
+        app:bsb_show_thumb_text="true"
+        app:bsb_thumb_text_color="@color/colorAccent"
+        app:bsb_thumb_text_size="18sp"
+        app:bsb_touch_to_seek="true"
+        app:bsb_track_size="5dp" />
+
+    <TextView
+        android:id="@+id/txt_column_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="@string/count_column_matrix"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_affine_transform"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="128dp"
+        android:text="@string/affine_transformation" />
+</LinearLayout>
