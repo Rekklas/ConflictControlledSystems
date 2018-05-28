@@ -1,9 +1,12 @@
 package com.rekklesdroid.android.conflictcontrolledsystems;
 
 import android.content.Intent;
+import android.support.design.widget.BaseTransientBottomBar;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
@@ -32,9 +35,11 @@ public class MatrixActivity extends AppCompatActivity {
     LinearLayout mLinearLayoutMain;
 
     private List<EditText> mMatrixValues = new ArrayList<>();
+    private EditText mEdtAlpha;
 
     private int rowCount;
     private int columnCount;
+    private EditText mEdtLambda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,30 +73,72 @@ public class MatrixActivity extends AppCompatActivity {
             }
         });
 
+        mEdtAlpha = new EditText(this);
+        mEdtAlpha.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
+        mEdtAlpha.setHint("Введіть альфа");
+        mEdtLambda = new EditText(this);
+        mEdtLambda.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
+        mEdtLambda.setHint("Введіть лямбда");
+
         Button btnMakeTransform = new Button(this);
         btnMakeTransform.setText(getResources().getString(R.string.btn_make_transform));
         btnMakeTransform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                makeAffineTransformation(v);
             }
         });
 
         mLinearLayoutMain.addView(tableLayout, tableParams);
-        mLinearLayoutMain.addView(btnFillMatrixRandomValues,lpView);
-        mLinearLayoutMain.addView(btnMakeTransform,lpView);
+        mLinearLayoutMain.addView(btnFillMatrixRandomValues, lpView);
+        mLinearLayoutMain.addView(mEdtAlpha, lpView);
+        mLinearLayoutMain.addView(mEdtLambda, lpView);
+        mLinearLayoutMain.addView(btnMakeTransform, lpView);
+    }
+
+    /**
+     * Method makes affine transformation of matrix
+     * 
+     * @param v button that was clicked
+     */
+    private void makeAffineTransformation(View v) {
+        try {
+            int alpha = Integer.parseInt(mEdtAlpha.getText().toString());
+            int lambda = Integer.parseInt(mEdtLambda.getText().toString());
+            for (EditText matrixValue : mMatrixValues) {
+                int value = Integer.parseInt(matrixValue.getText().toString());
+                matrixValue.setText(String.valueOf(getAffineTransformedValue(alpha, lambda, value)));
+            }
+        } catch (Exception ex) {
+            Snackbar.make(v, "Перевірте коректність значень!", Snackbar.LENGTH_LONG)
+                    .show();
+
+        }
+    }
+
+    /**
+     * Method implements formula for affine transformation of matrix values
+     *
+     * @param alpha value of parameter alpha
+     * @param lambda value of parameter lambda
+     * @param value matrix value
+     * @return transformed value
+     */
+    private int getAffineTransformedValue(int alpha, int lambda, int value) {
+        return value * alpha + lambda;
     }
 
     private void fillMatrixRandomValues() {
-        for (EditText editText: mMatrixValues){
-            editText.setText(String.valueOf(getRandomValue()));
+        for (EditText matrixValue : mMatrixValues) {
+            matrixValue.setText(String.valueOf(getRandomValue()));
         }
     }
 
     /**
      * Create matrix as TableLayout with editTexts
+     *
      * @param tableLayout TableLayout ViewGroup
-     * @param lpView layout parameters for views inside root layout
+     * @param lpView      layout parameters for views inside root layout
      */
     private void initTableLayout(TableLayout tableLayout, LayoutParams lpView) {
         TableRow.LayoutParams edtParams = new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -118,7 +165,7 @@ public class MatrixActivity extends AppCompatActivity {
      * @return randomly generated value
      */
     private int getRandomValue() {
-        return new Random().nextInt(DEFAULT_MAX_RANDOM_VALUE) - DEFAULT_MAX_RANDOM_VALUE/2;
+        return new Random().nextInt(DEFAULT_MAX_RANDOM_VALUE) - DEFAULT_MAX_RANDOM_VALUE / 2;
     }
 
     private void getIntentExtras() {
