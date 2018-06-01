@@ -5,4 +5,5 @@
     <string name="affine_transformation">Афінне перетворення</string>
     <string name="btn_make_transform">Зробити перетворення</string>
     <string name="btn_fill_matrix">Заповнити матрицю</string>
+    <string name="domination">Домінування</string>
 </resources>

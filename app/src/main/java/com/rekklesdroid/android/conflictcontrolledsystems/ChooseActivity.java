@@ -27,16 +27,30 @@ public class ChooseActivity extends AppCompatActivity {
         mBsbColumnCount = findViewById(R.id.bsb_column_count);
 
         Button btnAffineTransform = findViewById(R.id.btn_affine_transform);
+        Button btnDomination = findViewById(R.id.btn_domination);
 
         btnAffineTransform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChooseActivity.this, MatrixActivity.class);
                 Log.d("ROWS", String.valueOf(mBsbRowCount.getProgress()));
-                intent.putExtra(MatrixActivity.EXTRA_ROW_COUNT, mBsbRowCount.getProgress());
-                intent.putExtra(MatrixActivity.EXTRA_COLUMN_COUNT, mBsbColumnCount.getProgress());
+                putExtras(intent);
                 startActivity(intent);
             }
         });
+
+        btnDomination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChooseActivity.this, DominationActivity.class);
+                putExtras(intent);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void putExtras(Intent intent) {
+        intent.putExtra(MatrixActivity.EXTRA_ROW_COUNT, mBsbRowCount.getProgress());
+        intent.putExtra(MatrixActivity.EXTRA_COLUMN_COUNT, mBsbColumnCount.getProgress());
     }
 }
